@@ -292,6 +292,11 @@ AS_IF([test "x$enable_python" = xyes], [PYTHON_BINDINGS=1], [PYTHON_BINDINGS=0])
 AC_SUBST(PYTHON_BINDINGS)
 AC_SUBST(PYTHON)
 
+if test "x$enable_ktls" = xyes; then
+	PKG_CHECK_MODULES(GNUTLS, [gnutls >= 3.6.3])
+	PKG_STATIC(GNUTLS_LIBS_STATIC, [gnutls])
+fi
+
 # udev v190 introduced the btrfs builtin and a udev rule to use it.
 # Our udev rule gives us the friendly dm names but isn't required (or valid)
 # on earlier releases.
